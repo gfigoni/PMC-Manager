@@ -1,0 +1,38 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:'import PMC' /}
+
+
+<p>Import d'une édition PMC</p>
+
+#{form @PMCEditions.importPMC()}
+<p>
+    <label for="number">Numéro : </label>
+    <input type="text" name="number" id="number" value="${flash.number}" />
+    <span class="error">#{error 'number' /}</span>
+</p>
+<p>
+    <label for="date">Date (${play.libs.I18N.getDateFormat()}) : </label>
+    <input type="text" name="date" id="date" value="${flash.date}" />
+    <span class="error">#{error 'date' /}</span>
+</p>
+<p>
+    <label for="jackpot">Jackpot : </label>
+    <input type="checkbox" name="bonus" id="bonus" ${flash.bonus ? 'checked = "checked"' : ''} />
+    <input type="text" name="jackpot" id="jackpot" value="${flash.jackpot}" />
+    <span class="error">#{error 'jackpot' /}</span>
+</p>
+<p>
+    <label for="url">Maps : </label>
+    <select multiple="multiple" name="maps" id="maps" size="20">
+        #{list items:maps, as:'map'}
+        <option value="${map.id}" #{if ((flash.maps != null) && (flash.maps.contains(map.id)))} selected="selected" #{/if}>${map.name} [${map.id}]</option>
+        #{/list}
+    </select>
+    <span class="error">#{error 'maps' /}</span>
+</p>
+<p>
+    <input type="submit" value="importer" />
+</p>
+
+#{/form}
+

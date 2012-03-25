@@ -1,0 +1,36 @@
+title.default = Planets Millions Cup
+title.pmc = Planets Millions Cup | edition #%s
+title.players = Planets Millions Cup | players
+title.player = Planets Millions Cup | %s
+
+main.home = Home
+main.players = Players
+main.pmcs = PMC editions
+main.forum = Forum
+main.admin = Administration
+
+pmc = PMC
+pmc.number = PMC #%s
+pmc.number.title = PMC #
+pmc.date = Date
+pmc.size = Players
+pmc.nbparticipants = %s players
+pmc.podium = Podium
+
+player = Player
+player.login = Login
+player.rank = Rank
+player.score = Score
+player.gain = Gain
+player.nbraces = Races
+player.rounds = Rounds
+player.mapperbonus = Mapper bonus
+player.podiumbonus = Podium bonus
+
+error.wrongpmc = This PMC does not exist.
+error.nopmc = No PMC available
+error.wrongplayer = This player does not exist.
+error.noplayer = No player
+
+# administration
+validation.required = %s is required

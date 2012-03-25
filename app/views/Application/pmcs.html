@@ -1,0 +1,43 @@
+#{extends 'main.html' /}
+#{set title:messages.get('title.default') /}
+
+#{if pmcs.size()}
+<div class="title">
+    &{'main.pmcs'}
+</div>
+
+<div class="content">
+    <table>
+        <thead>
+            <tr>
+                <th>&{'pmc.number.title'}</th>
+                <th>&{'pmc.date'}</th>
+                <th>&{'pmc.size'}</th>
+                <th>&{'pmc.podium'}</th>
+            </tr>
+        </thead>
+        <tbody>
+            #{list items:pmcs, as:'pmc'}
+            <tr>
+                <td>#{a @Application.pmc(pmc.number)}&{'pmc.number', pmc.number}#{/a}</td>
+                <td>${pmc.date.format()}</td>
+                <td>${pmc.results.size()}</td>
+                <td>
+                    #{list items:pmc.results, as:'result'}
+                    #{if result_index <= 3}
+                    <strong>${result.rank}|</strong> ${result.login.player.name}&nbsp;&nbsp;&nbsp;
+                    #{/if}
+                    #{/list}
+                </td>
+            </tr>
+            #{/list}
+        </tbody>
+    </table>
+</div>
+#{/if}
+
+#{else}
+<div class="content">
+    <h1>&{'error.nopmc'}</h1>
+</div>
+#{/else}

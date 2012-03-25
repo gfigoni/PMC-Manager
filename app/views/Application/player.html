@@ -1,0 +1,39 @@
+#{extends 'main.html' /}
+#{set title:messages.get('title.player', player?.name) /}
+
+#{if player}
+<div class="title">
+    <h1>${player.name}</h1>
+</div>
+
+<div class="content">
+    <div class="pmcs">
+        <table>
+            <thead>
+                <tr>&{'pmc.number.title'}</tr>
+                <tr>&{'player.rank'}</tr>
+                <tr>&{'player.score'}</tr>
+                <tr>&{'player.gain'}</tr>
+                <tr>&{'player.nbraces'}</tr>
+            </thead>
+            <tbody>
+                #{list items:results, as:'result'}
+                <tr>
+                    <td>#{a @Application.pmc(result.pmc.number)}&{'pmc.number', result.pmc.number}#{/a}</td>
+                    <td>${result.rank} / ${result.pmc.results.size()}</td>
+                    <td>${result.score}</td>
+                    <td>${result.gain}</td>
+                    <td>${result.nbRaces}</td>
+                </tr>
+                #{/list}
+            </tbody>
+        </table>
+    </div>
+</div>
+#{/if}
+
+#{else}
+<div class="content">
+    <h1>&{'error.wrongplayer'}</h1>
+</div>
+#{/else}

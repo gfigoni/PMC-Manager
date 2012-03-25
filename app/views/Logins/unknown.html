@@ -1,0 +1,43 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:'import logins' /}
+
+#{if unknownLogins}
+<div>
+    <h3>La déclaration des logins suivants est nécessaire pour l'import de la PMC #${number}</h3>
+    Pour chacun des logins non actuellement déclarés, vous pouvez :
+    <ul>
+        <li>créer un nouveau joueur en précisant son nom</li>
+        <li>rattacher ce login à un joueur existant</li>
+    </ul>
+    #{form @Logins.addLogins()}
+    #{list items:unknownLogins.keySet(), as:'login'}
+    <p>
+        <label for="${login}">${login}</label>
+        <input type="text" id="${login}" name="newPlayer.${login}" value="${unknownLogins.get(login)}"/>
+        <select name="existingPlayer.${login}">
+            <option value="">-- joueur inconnu --</option>
+            #{list items:allPlayers, as:'player'}
+            <option value="${player.id}">${player.name}</option>
+            #{/list}
+        </select>
+        <input type="hidden" name="logins" value="${login}" />
+    </p>
+    #{/list}
+    <p>
+        <input type="hidden" name="number" value="${number}" />
+        <input type="hidden" name="date" value="${date.format()}" />
+        <input type="hidden" name="jackpot" value="${jackpot}" />
+        <input type="hidden" name="bonus" value="${bonus}" />
+        #{list items:maps, as:'id'}
+        <input type="hidden" name="maps" value="${id}" />
+        #{/list}
+        <input type="submit" value="ajouter" />
+    </p>
+    #{/form}
+</div>
+#{/if}
+#{else}
+<div class="empty">
+    No players required.
+</div>
+#{/else}

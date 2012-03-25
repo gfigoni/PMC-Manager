@@ -1,0 +1,70 @@
+#{extends 'main.html' /}
+#{set title:messages.get('title.pmc', pmc?.number) /}
+
+#{if pmc}
+<div class="title">
+    <h1>&{'pmc.number', pmc.number}</h1>
+    <p>${pmc.date.format()} - &{'pmc.nbparticipants',pmc.results.size()}</p>
+</div>
+<div class="content">
+    <div class="pmc">
+        <table>
+            <thead>
+                <tr>&{'player.rank'}</tr>
+                <tr>&{'player'}</tr>
+                <tr>&{'player.score'}</tr>
+                <tr>&{'player.gain'}</tr>
+                <tr>&{'player.podiumbonus'}</tr>
+                <tr>&{'player.mapperbonus'}</tr>
+                <tr>&{'player.nbraces'}</tr>
+            </thead>
+            <tbody>
+                #{list pmc.results, as:'result'}
+                <tr>
+                    <td>${result.rank}</td>
+                    <td>#{a @Application.player(result.login)}${result.login.player.name}#{/a} [${result.login}]</td>
+                    <td>${result.score}</td>
+                    <td>${result.gain}</td>
+                    <td>${result.podiumBonus}</td>
+                    <td>${result.mapperBonus}</td>
+                    <td>${result.nbRaces}</td>
+                </tr>
+                #{/list}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="races">
+        #{list items:pmc.races, as:'race'}
+        <div class="race">
+            <table>
+                <caption>${race.map.name} | <strong>${race.map.login.player.name}</strong> | ${race.map.environment}</caption>
+                <thead>
+                    <tr>&{'player.rank'}</tr>
+                    <tr>&{'player'}</tr>
+                    <tr>&{'player.score'}</tr>
+                </thead>
+                <tbody>
+                #{list race.results, as:'result'}
+                <tr>
+                    <td>${result.rank}</td>
+                    <td>#{a @Application.player(result.login)}${result.login.player.name}#{/a} [${result.login}]</td>
+<!--
+                    <td>#{a @Application.player(result.login)}${result.login}#{/a}</td>
+-->
+                    <td>${result.score}</td>
+                </ul>
+                #{/list}
+            </tbody>
+            </table>
+        </div>
+        #{/list}
+    </div>
+</div>
+#{/if}
+
+#{else}
+<div class="content">
+    <h1>&{'error.nopmc'}</h1>
+</div>
+#{/else}

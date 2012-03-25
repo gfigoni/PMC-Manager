@@ -1,0 +1,14 @@
+/tmp
+/modules
+/lib
+/test-result
+/logs
+/nbproject
+/.settings
+/.metadata
+/.classpath
+/.project
+/eclipse
+/logs
+/.sublime-project
+/.sublime-workspace
