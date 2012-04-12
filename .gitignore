@@ -12,3 +12,7 @@
 /logs
 /.sublime-project
 /.sublime-workspace
+/.bat
+/.dat
+/.livereload
+/psd

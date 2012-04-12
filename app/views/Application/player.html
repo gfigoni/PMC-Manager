@@ -1,35 +1,34 @@
 #{extends 'main.html' /}
 #{set title:messages.get('title.player', player?.name) /}
+#{set page:'players' /}
 
 #{if player}
-<div class="title">
-    <h1>${player.name}</h1>
+<div class="title_box">
+    <h2 class="title_icon players_icon">${player.name}</h2>
 </div>
 
-<div class="content">
-    <div class="pmcs">
-        <table>
-            <thead>
-                <tr>&{'pmc.number.title'}</tr>
-                <tr>&{'player.rank'}</tr>
-                <tr>&{'player.score'}</tr>
-                <tr>&{'player.gain'}</tr>
-                <tr>&{'player.nbraces'}</tr>
-            </thead>
-            <tbody>
-                #{list items:results, as:'result'}
-                <tr>
-                    <td>#{a @Application.pmc(result.pmc.number)}&{'pmc.number', result.pmc.number}#{/a}</td>
-                    <td>${result.rank} / ${result.pmc.results.size()}</td>
-                    <td>${result.score}</td>
-                    <td>${result.gain}</td>
-                    <td>${result.nbRaces}</td>
-                </tr>
-                #{/list}
-            </tbody>
-        </table>
-    </div>
+
+<div class="player_box">
+    <table>
+        <tr>
+            <th>&{'pmc.number.title'}</th>
+            <th>&{'player.rank'}</th>
+            <th>&{'player.score'}</th>
+            <th>&{'player.gain'}</th>
+            <th>&{'player.nbraces'}</th>
+        </tr>
+        #{list items:results, as:'result'}
+        <tr>
+            <td>#{a @Application.pmc(result.pmc.number)}&{'pmc.number', result.pmc.number}#{/a}</td>
+            <td>${result.rank} / ${result.pmc.results.size()}</td>
+            <td>${result.score}</td>
+            <td>${result.gain}</td>
+            <td>${result.nbRaces}</td>
+        </tr>
+        #{/list}
+    </table>
 </div>
+
 #{/if}
 
 #{else}
