@@ -1,37 +1,38 @@
 #{extends 'main.html' /}
 #{set title:messages.get('title.default') /}
+#{set page:'pmcs' /}
 
 #{if pmcs.size()}
-<div class="title">
-    &{'main.pmcs'}
+
+<div class="title_box">
+    <h2 class="title_icon pmcs_icon">&{'main.pmcs'}</h2>
 </div>
 
-<div class="content">
+
+<div class="pmcs_box">
     <table>
-        <thead>
-            <tr>
-                <th>&{'pmc.number.title'}</th>
-                <th>&{'pmc.date'}</th>
-                <th>&{'pmc.size'}</th>
-                <th>&{'pmc.podium'}</th>
-            </tr>
-        </thead>
-        <tbody>
-            #{list items:pmcs, as:'pmc'}
-            <tr>
-                <td>#{a @Application.pmc(pmc.number)}&{'pmc.number', pmc.number}#{/a}</td>
-                <td>${pmc.date.format()}</td>
-                <td>${pmc.results.size()}</td>
-                <td>
-                    #{list items:pmc.results, as:'result'}
-                    #{if result_index <= 3}
-                    <strong>${result.rank}|</strong> ${result.login.player.name}&nbsp;&nbsp;&nbsp;
-                    #{/if}
-                    #{/list}
-                </td>
-            </tr>
-            #{/list}
-        </tbody>
+        <tr>
+            <th>&{'pmc.number.title'}</th>
+            <th>&{'pmc.date'}</th>
+            <th>&{'pmc.size'}</th>
+            <th>&{'pmc.podium'}</th>
+        </tr>
+        #{list items:pmcs, as:'pmc'}
+        <tr>
+            <td>#{a @Application.pmc(pmc.number)}&{'pmc.number', pmc.number}#{/a}</td>
+            <td>${pmc.date.format()}</td>
+            <td>${pmc.results.size()}</td>
+            <td>
+                <ul class="podium">
+                #{list items:pmc.results, as:'result'}
+                #{if result_index <= 3}
+                    <li><strong>${result.rank}|</strong> ${result.login.player.name}&nbsp;&nbsp;&nbsp;</li>
+                #{/if}
+                #{/list}
+                </ul>
+            </td>
+        </tr>
+        #{/list}
     </table>
 </div>
 #{/if}
