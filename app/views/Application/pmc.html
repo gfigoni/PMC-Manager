@@ -20,7 +20,7 @@
 <a name="top"></a>
 <div class="title_box">
     <h2 class="title_icon pmcs_icon">&{'pmc.number', pmc.number}</h2>
-    <span>${pmc.date.format()} - &{'pmc.nbparticipants',pmc.results.size()}</span>
+    <span>${pmc.date.format()} - &{'pmc.nbparticipants',pmc.results.size()} #{if pmc.jackpot}- ${pmc.jackpot.format('#,###')} planets#{/if}</span>
 </div>
 <div id="content">
     <div class="pmc_box">
@@ -40,8 +40,8 @@
                 <td>#{a @Application.player(result.login)}${result.login.player.name}#{/a} [${result.login}]</td>
                 <td>${result.score}</td>
                 <td>${result.gain}</td>
-                <td>${result.podiumBonus}</td>
-                <td>${result.mapperBonus}</td>
+                <td>#{if result.podiumBonus}${result.podiumBonus}#{/if}</td>
+                <td>#{if result.mapperBonus}${result.mapperBonus}#{/if}</td>
                 <td>${result.nbRaces}</td>
             </tr>
             #{/list}
