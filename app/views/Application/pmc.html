@@ -19,7 +19,7 @@
 #{if pmc}
 <a name="top"></a>
 <div class="title_box">
-    <h2 class="title_icon pmcs_icon">&{'pmc.number', pmc.number}</h2>
+    <h2 class="title_icon pmcs_icon">&{'pmc.number', pmc.number} #{a @Application.pmcGains(pmc.number)}<img src="/public/images/load.png"/>#{/a}</h2>
     <span>${pmc.date.format()} - &{'pmc.nbparticipants',pmc.results.size()} #{if pmc.jackpot}- ${pmc.jackpot.format('#,###')} planets#{/if}</span>
 </div>
 <div id="content">

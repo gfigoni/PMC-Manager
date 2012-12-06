@@ -6,6 +6,7 @@
 GET     /                                       Application.pmcs
 GET     /pmc/{number}                           Application.pmc
 GET     /pmc					Application.pmcs
+GET     /gains/{number}                         Application.pmcGains
 GET     /player/{loginName}                     Application.player
 GET	/player 				Application.players
 

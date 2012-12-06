@@ -1,5 +1,8 @@
 package controllers;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import play.mvc.*;
 
 import java.util.*;
@@ -47,5 +50,25 @@ public class Application extends Controller {
     public static void pmcs() {
         List<PMCEdition> pmcs = PMCEdition.find("order by date desc").fetch();
         render(pmcs);
+    }
+    
+    public static void pmcGains(Integer number) {
+        PMCEdition pmc = PMCEdition.findByNumber(number);
+        
+        // build 
+        StringBuilder s = new StringBuilder();
+        for (PMCResult result : pmc.results) {
+            s.append(result.login);
+            s.append("\t");
+            s.append(result.gain);
+            s.append("\r\n");
+        }
+        
+        try {
+            InputStream is = new ByteArrayInputStream(s.toString().getBytes("UTF-8"));
+            renderBinary(is, "pmc-" + number + ".txt", "text/plain", false);
+        } catch (UnsupportedEncodingException ex) {
+            ex.printStackTrace();
+        }
     }
 }
