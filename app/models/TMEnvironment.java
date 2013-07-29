@@ -6,7 +6,7 @@ package models;
  */
 public enum TMEnvironment {
 
-    STADIUM, BAY, ISLAND, COAST, RALLY, SPEED, ALPINE, CANYON;
+    STADIUM, BAY, ISLAND, COAST, RALLY, SPEED, ALPINE, CANYON, VALLEY;
 
     public static TMEnvironment getEnvironment(String name) {
         return TMEnvironment.valueOf(name.toUpperCase());
