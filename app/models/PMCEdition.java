@@ -13,7 +13,7 @@ import play.db.jpa.Model;
 @Entity
 public class PMCEdition extends Model {
 
-    private static final Integer BONUS_MAPPER = 1000;
+    private static final Integer BONUS_MAPPER = 2500;
     private static final Integer BONUS_FIRST = 1000;
     private static final Integer BONUS_SECOND = 500;
     private static final Integer BONUS_THIRD = 250;
@@ -160,17 +160,9 @@ public class PMCEdition extends Model {
             // que l'ensemble des bonus podium sont redistribués
             bonus += BONUS_FIRST + BONUS_SECOND + BONUS_THIRD;
         }
-        // on compte un bonus pour chaque mappeur ayant participé à l'édition uniquement
-        // on enlève les map/login pour les mappeurs n'ayant participé à aucune course
-        Map<String, Login> playingMappers = new HashMap<String, Login>(); // liste des mappeurs par course ayant participé à l'édition
-        for (String mapId : mappers.keySet()) {
-            Login author = mappers.get(mapId);
-            if (logins.contains(author)) {
-                playingMappers.put(mapId, author);
-            }
-        }
+        // on compte un bonus pour chaque mappeur, qu'il ait participé à l'édition ou pas
         if (useBonus) {
-            bonus += BONUS_MAPPER * playingMappers.size();
+            bonus += BONUS_MAPPER * mappers.size();
         }
         
         // calcul de la valeur du point pour les gains.
@@ -194,7 +186,7 @@ public class PMCEdition extends Model {
             result.score = score;
             result.nbRaces = nbRace;
             if (useBonus) {
-                for (String mapId : playingMappers.keySet()) {
+                for (String mapId : mappers.keySet()) {
                     Login author = mappers.get(mapId);
                     if (login.equals(author)) {
                         mapperBonus += BONUS_MAPPER;
