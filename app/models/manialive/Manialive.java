@@ -24,7 +24,7 @@ public class Manialive {
         PreparedStatement stmt = null;
         Connection con = null;
         try {
-            String query = "select challenge_uid,challenge_nameStripped,challenge_environment,challenge_author from challenges";
+            String query = "select challenge_uid,challenge_nameStripped,challenge_environment,challenge_author from exp_maps";
             con = DBUtils.getConnection();
             stmt = con.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
@@ -67,7 +67,7 @@ public class Manialive {
         PreparedStatement stmt = null;
         Connection con = null;
         try {
-            String query = "select challenge_uid,challenge_nameStripped,challenge_environment,challenge_author from challenges where challenge_uid = ?";
+            String query = "select challenge_uid,challenge_nameStripped,challenge_environment,challenge_author from exp_maps where challenge_uid = ?";
             con = DBUtils.getConnection();
             stmt = con.prepareStatement(query);
             stmt.setString(1, mapId);
@@ -110,7 +110,7 @@ public class Manialive {
         PreparedStatement stmt = null;
         Connection con = null;
         try {
-            String query = "select lr.record_playerlogin, p.player_nickname from localrecords lr, players p where lr.record_challengeuid = ? and p.player_login = lr.record_playerlogin order by lr.record_score asc";
+            String query = "select lr.record_playerlogin, p.player_nickname from exp_records lr, exp_players p where lr.record_challengeuid = ? and p.player_login = lr.record_playerlogin order by lr.record_score asc";
             con = DBUtils.getConnection();
             stmt = con.prepareStatement(query);
             stmt.setString(1, mapId);
